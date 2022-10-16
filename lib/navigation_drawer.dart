@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:healthy_calculator/views/adjusted_weight.dart';
 import 'package:healthy_calculator/views/profile_page.dart';
 
 import 'my_drawer_header.dart';
@@ -17,8 +18,8 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
     var container;
     if (currentPage == DrawerSections.profile) {
       container = ProfilePage();
-    }else if (currentPage == DrawerSections.latest) {
-     // container = LatestPage();
+    }else if (currentPage == DrawerSections.adjustedWeight) {
+    container = AdjustedWeight();
     }
 
     return Scaffold(
@@ -49,10 +50,10 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
       child: Column(
         // shows the list of menu drawer
         children: [
-          menuItem(1, "Profile", Icons.account_circle,
+          menuItem(1, "Perfil", Icons.account_circle,
               currentPage == DrawerSections.profile ? true : false),
-          menuItem(2, "Latest", Icons.people_alt_outlined,
-              currentPage == DrawerSections.latest ? true : false),
+          menuItem(2, "Peso Ajustado", Icons.people_alt_outlined,
+              currentPage == DrawerSections.adjustedWeight ? true : false),
           menuItem(3, "Events", Icons.event,
               currentPage == DrawerSections.events ? true : false),
           menuItem(4, "Notes", Icons.notes,
@@ -81,7 +82,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
             if (id == 1) {
               currentPage = DrawerSections.profile;
             } else if (id == 2) {
-              currentPage = DrawerSections.latest;
+              currentPage = DrawerSections.adjustedWeight;
             } else if (id == 3) {
               currentPage = DrawerSections.events;
             } else if (id == 4) {
@@ -128,7 +129,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
 
 enum DrawerSections {
   profile,
-  latest,
+  adjustedWeight,
   events,
   notes,
   settings,
