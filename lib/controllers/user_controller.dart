@@ -6,12 +6,13 @@ import '../services/service.dart';
 
 class UserController extends ChangeNotifier  {
   final _id = RxNotifier<int?>(0);
+  final _sex = RxNotifier<String>('Masculino');
   /*
   final _age = RxNotifier<int>(0);
   final _weight = RxNotifier<double>(0);
   final _height = RxNotifier<int>(0);
   final _hip = RxNotifier<int>(0);
-  final _sex = RxNotifier<String>('');
+
 
   void setAge(int value)=> _age.value = value;
   void setWeight(double value)=> _weight.value = value;
@@ -19,12 +20,14 @@ class UserController extends ChangeNotifier  {
   void setHip(int value)=> _hip.value = value;
   void setSex(String value)=> _sex.value = value;*/
   int? get id => _id.value;
+  String get sex => _sex.value;
 
+  void setSex(String value)=> _sex.value = value;
   final ageController = TextEditingController();
   final weightController = TextEditingController();
   final heightController = TextEditingController();
   final hipController = TextEditingController();
-  final sexController = TextEditingController();
+
 
 Future<void> getUser()async{
   final Services _service = new Services ();
@@ -41,18 +44,26 @@ Future<void> getUser()async{
     weightController.text = user!.getWeight.toString();
     heightController.text = user!.getHeight.toString();
     hipController.text = user!.getHip.toString();
-    sexController.text = user!.getSex.toString();
+    _sex.value = user!.getSex.toString();
   }
   notifyListeners();
 }
 
-  Future<void> insertNewUser(User user) async {
+  Future<void> insertNewUser() async {
     final Services _service = new Services ();
+    User user = User(null, int.parse(ageController.text),
+        double.parse(weightController.text),
+        int.parse(heightController.text),
+        int.parse(hipController.text),_sex.value);
     await _service.insert(user);
   }
 
-  Future<void> updateUser(User user) async {
+  Future<void> updateUser( ) async {
     final Services _service = new Services ();
+    User user = User(_id.value, int.parse(ageController.text),
+        double.parse(weightController.text),
+        int.parse(heightController.text),
+        int.parse(hipController.text),_sex.value);
     await _service.update(user);
   }
 }
