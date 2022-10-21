@@ -19,10 +19,12 @@ class _ProfilePageState extends State<ProfilePage> {
     'Masculino',
     'Feminino',
   ];
-
+void initState(){
+  super.initState();
+  controller.getUser();
+}
   @override
   Widget build(BuildContext context) {
-    controller.getUser();
     return Scaffold(
         body: SingleChildScrollView(
         padding: EdgeInsets.fromLTRB(10.0, 50.0, 10.0, 0.0),
@@ -132,12 +134,6 @@ CustomTextField({required String label, required IconData icon, required TextInp
     keyboardType: input,
     controller: textController,
     onChanged:  (value) {
-  /*  switch(label) {
-      case "Idade": controller.setAge(int.parse(value));break;
-      case "Altura": controller.setHeight(int.parse(value));break;
-      case "Peso": controller.setWeight(double.parse(value));break;
-      case "Quadril": controller.setHip(int.parse(value));break;
-    }*/
     },
     validator: (value) {
       if (value!.isEmpty) {
