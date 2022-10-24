@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:healthy_calculator/views/adjusted_weight.dart';
+import 'package:healthy_calculator/views/ideal_weight.dart';
 import 'package:healthy_calculator/views/profile_page.dart';
 
 import 'my_drawer_header.dart';
@@ -20,6 +21,8 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
       container = ProfilePage();
     }else if (currentPage == DrawerSections.adjustedWeight) {
     container = AdjustedWeight();
+    }else if (currentPage == DrawerSections.idealWeight) {
+      container = IdealWeight();
     }
 
     return Scaffold(
@@ -54,8 +57,8 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
               currentPage == DrawerSections.profile ? true : false),
           menuItem(2, "Peso Ajustado", Icons.people_alt_outlined,
               currentPage == DrawerSections.adjustedWeight ? true : false),
-          menuItem(3, "Events", Icons.event,
-              currentPage == DrawerSections.events ? true : false),
+          menuItem(3, "Peso Ideal", Icons.event,
+              currentPage == DrawerSections.idealWeight ? true : false),
           menuItem(4, "Notes", Icons.notes,
               currentPage == DrawerSections.notes ? true : false),
           Divider(),
@@ -84,7 +87,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
             } else if (id == 2) {
               currentPage = DrawerSections.adjustedWeight;
             } else if (id == 3) {
-              currentPage = DrawerSections.events;
+              currentPage = DrawerSections.idealWeight;
             } else if (id == 4) {
               currentPage = DrawerSections.notes;
             } else if (id == 5) {
@@ -130,7 +133,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
 enum DrawerSections {
   profile,
   adjustedWeight,
-  events,
+  idealWeight,
   notes,
   settings,
   notifications,
