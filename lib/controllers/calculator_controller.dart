@@ -6,9 +6,10 @@ import '../services/service.dart';
 class CalculatorController extends ChangeNotifier  {
   final _adjustedWeight = RxNotifier<String>('');
   final _idealWeight = RxNotifier<String>('');
+  final _imc = RxNotifier<String>('');
   String get adjustedWeight => _adjustedWeight.value;
   String get idealWeight => _idealWeight.value;
-
+  String get imc => _imc.value;
   Future<void> calculateAdjustedWeight() async {
     User? user = await getUser();
     if(user!=null){
@@ -33,6 +34,17 @@ class CalculatorController extends ChangeNotifier  {
         idealWeight = 49 + (0.67 *(user.getHeight - 152.4));
       }
       _idealWeight.value = idealWeight.toStringAsFixed(2) + "kg";
+      notifyListeners();
+    }
+
+  }
+  Future<void> calculateIMC() async {
+    User? user = await getUser();
+    if(user!=null){
+
+      double height = (user.getHeight * user.getHeight).toDouble()/10000;
+      double imc =user.getWeight/height;
+      _imc.value = imc.toStringAsFixed(2);
       notifyListeners();
     }
 
