@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/cupertino.dart';
 import 'package:rx_notifier/rx_notifier.dart';
 import '../models/user.dart';
@@ -7,9 +9,12 @@ class CalculatorController extends ChangeNotifier  {
   final _adjustedWeight = RxNotifier<String>('');
   final _idealWeight = RxNotifier<String>('');
   final _imc = RxNotifier<String>('');
+  final _iac = RxNotifier<String>('');
   String get adjustedWeight => _adjustedWeight.value;
   String get idealWeight => _idealWeight.value;
   String get imc => _imc.value;
+  String get iac => _iac.value;
+
   Future<void> calculateAdjustedWeight() async {
     User? user = await getUser();
     if(user!=null){
@@ -38,7 +43,22 @@ class CalculatorController extends ChangeNotifier  {
     }
 
   }
-  Future<void> calculateIMC() async {
+  Future<void> calculateIAC() async {
+    User? user = await getUser();
+    if(user!=null){
+      double height = user.getHeight/100;
+      double iac = (user.getHip/pow(height,1.5))-18;
+      _iac.value = iac.toStringAsFixed(2);
+      notifyListeners();
+    }
+
+  }
+  Future<User?> getUser()async{
+    final Services _service = new Services ();
+    return await _service.getUser();
+  }
+
+  Future<void>  calculateIMC()  async {
     User? user = await getUser();
     if(user!=null){
 
@@ -48,9 +68,5 @@ class CalculatorController extends ChangeNotifier  {
       notifyListeners();
     }
 
-  }
-  Future<User?> getUser()async{
-    final Services _service = new Services ();
-    return await _service.getUser();
   }
 }

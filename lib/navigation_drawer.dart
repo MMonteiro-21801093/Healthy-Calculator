@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:healthy_calculator/views/adjusted_weight.dart';
+import 'package:healthy_calculator/views/iac_page.dart';
 import 'package:healthy_calculator/views/ideal_weight.dart';
 import 'package:healthy_calculator/views/imc_page.dart';
 import 'package:healthy_calculator/views/profile_page.dart';
@@ -26,6 +27,8 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
       container = IdealWeight();
     }else if (currentPage == DrawerSections.imc) {
       container = ImcPage();
+    }else if (currentPage == DrawerSections.iac) {
+      container = IacPage();
     }
 
     return Scaffold(
@@ -64,16 +67,18 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
               currentPage == DrawerSections.idealWeight ? true : false),
           menuItem(4, "IMC", Icons.notes,
               currentPage == DrawerSections.imc ? true : false),
-          Divider(),
-          menuItem(5, "Settings", Icons.settings_outlined,
+          menuItem(5, "Índice de adiposidade", Icons.notes,
+              currentPage == DrawerSections.imc ? true : false),
+     /*     Divider(),
+          menuItem(6, "Settings", Icons.settings_outlined,
               currentPage == DrawerSections.settings ? true : false),
-          menuItem(6, "Notifications", Icons.notifications_outlined,
+          menuItem(7, "Notifications", Icons.notifications_outlined,
               currentPage == DrawerSections.notifications ? true : false),
           Divider(),
-          menuItem(7, "Privacy policy", Icons.privacy_tip_outlined,
+          menuItem(8, "Privacy policy", Icons.privacy_tip_outlined,
               currentPage == DrawerSections.privacy_policy ? true : false),
-          menuItem(8, "Send feedback", Icons.feedback_outlined,
-              currentPage == DrawerSections.send_feedback ? true : false),
+          menuItem(9, "Send feedback", Icons.feedback_outlined,
+              currentPage == DrawerSections.send_feedback ? true : false),*/
         ],
       ),
     );
@@ -94,14 +99,15 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
             } else if (id == 4) {
               currentPage = DrawerSections.imc;
             } else if (id == 5) {
-              currentPage = DrawerSections.settings;
-            } else if (id == 6) {
+              currentPage = DrawerSections.iac;
+            }
+/*            } else if (id == 6) {
               currentPage = DrawerSections.notifications;
             } else if (id == 7) {
               currentPage = DrawerSections.privacy_policy;
             } else if (id == 8) {
               currentPage = DrawerSections.send_feedback;
-            }
+            }*/
           });
         },
         child: Padding(
@@ -138,6 +144,7 @@ enum DrawerSections {
   adjustedWeight,
   idealWeight,
   imc,
+  iac,
   settings,
   notifications,
   privacy_policy,
