@@ -6,7 +6,6 @@ import '../controllers/calculator_controller.dart';
 
 class TmbPage extends StatelessWidget {
   final controller = CalculatorController();
-
   @override
   Widget build(BuildContext context) {
     controller.calculateTMB();
